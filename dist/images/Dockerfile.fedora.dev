@@ -29,13 +29,13 @@ RUN INSTALL_PKGS=" \
     autoconf automake libtool g++ gcc fedora-packager rpmdevtools \
     unbound unbound-devel groff python3-sphinx graphviz openssl openssl-devel \
     libbpf-devel libxdp-devel numactl-devel \
-    checkpolicy libcap-ng-devel selinux-policy-devel" && \
+    checkpolicy libcap-ng-devel selinux-policy-devel systemtap-sdt-devel" && \
     dnf install --best --refresh -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     dnf clean all && rm -rf /var/cache/dnf/*
 
 # Clone OVS Source Code.
-ARG OVS_REPO=https://github.com/openvswitch/ovs.git
-ARG OVS_BRANCH=master
+ARG OVS_REPO=https://github.com/dceara/ovs.git
+ARG OVS_BRANCH=devconf-2024-add-unixctl-command-ufid-oflow-v2
 WORKDIR /root
 RUN git clone $OVS_REPO --single-branch --branch=$OVS_BRANCH
 
@@ -49,8 +49,8 @@ RUN rm rpm/rpmbuild/RPMS/x86_64/*devel*
 RUN git log -n 1
 
 # Clone OVN Source Code.
-ARG OVN_REPO=https://github.com/ovn-org/ovn.git
-ARG OVN_BRANCH=main
+ARG OVN_REPO=https://github.com/almusil/ovn.git
+ARG OVN_BRANCH=detrace
 WORKDIR /root
 RUN git clone $OVN_REPO --single-branch --branch=$OVN_BRANCH
 
