@@ -834,7 +834,7 @@ coredns_patch() {
   # Patch it
   fixed_coredns=$(
     printf '%s' "${original_coredns}" | sed \
-      -e 's/^.*kubernetes cluster\.local/& net/' \
+      -e 's/^.*kubernetes cluster\.local/& net internal/' \
       -e '/^.*upstream$/d' \
       -e '/^.*fallthrough.*$/d' \
       -e 's/^\(.*forward \.\).*$/\1 '"$dns_server"' {/' \
